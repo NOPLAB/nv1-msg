@@ -1,14 +1,28 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct Velocity {
+    pub linear_x: f32,
+    pub linear_y: f32,
+    pub angular_z: f32,
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct Ir {
+    pub x: f32,
+    pub y: f32,
+    pub strength: f32,
+}
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct HubMsgPackRx {
+    pub vel: Velocity,
+    pub kick: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct HubMsgPackTx {
+    pub stop: bool,
+    pub ir: Ir,
+    pub have_ball: bool,
 }
