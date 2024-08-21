@@ -4,13 +4,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
 pub struct Velocity {
-    pub linear_x: f32,
-    pub linear_y: f32,
-    pub angular_z: f32,
+    pub x: f32,
+    pub y: f32,
+    pub angle: f32,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
 pub struct Ir {
+    pub x: f32,
+    pub y: f32,
+    pub strength: f32,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct Line {
     pub x: f32,
     pub y: f32,
     pub strength: f32,
@@ -24,7 +31,11 @@ pub struct HubMsgPackRx {
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
 pub struct HubMsgPackTx {
-    pub stop: bool,
+    pub pause: bool,
+    pub shutdown: bool,
+    pub reboot: bool,
+    pub vel: Velocity,
     pub ir: Ir,
+    pub line: Line,
     pub have_ball: bool,
 }
