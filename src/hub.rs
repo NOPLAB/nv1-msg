@@ -17,39 +17,12 @@ pub struct ToHub {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub enum JetsonConfig {
-    #[default]
-    None,
-    OpenCVOpp(OpenCVOpp),
-    OpenCVOwn(OpenCVOwn),
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct OpenCVOpp {
-    pub h_min: u8,
-    pub h_max: u8,
-    pub s_min: u8,
-    pub s_max: u8,
-    pub v_min: u8,
-    pub v_max: u8,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct OpenCVOwn {
-    pub h_min: u8,
-    pub h_max: u8,
-    pub s_min: u8,
-    pub s_max: u8,
-    pub v_min: u8,
-    pub v_max: u8,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
 pub struct ToJetson {
     pub sys: System,
     pub vel: Movement,
     pub sensor: Sensor,
     pub opp_goal_color: GoalColor,
+    pub config: JetsonConfig,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
@@ -78,4 +51,32 @@ pub enum GoalColor {
     #[default]
     Blue,
     Yellow,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub enum JetsonConfig {
+    #[default]
+    None,
+    OpenCVOpp(OpenCVOpp),
+    OpenCVOwn(OpenCVOwn),
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct OpenCVOpp {
+    pub h_min: u8,
+    pub h_max: u8,
+    pub s_min: u8,
+    pub s_max: u8,
+    pub v_min: u8,
+    pub v_max: u8,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct OpenCVOwn {
+    pub h_min: u8,
+    pub h_max: u8,
+    pub s_min: u8,
+    pub s_max: u8,
+    pub v_min: u8,
+    pub v_max: u8,
 }
