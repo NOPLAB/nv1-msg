@@ -11,6 +11,8 @@ pub struct Movement {
 pub struct ToHub {
     pub vel: Movement,
     pub kick: bool,
+    pub goal_opp: Option<f32>,
+    pub goal_own: Option<f32>,
     pub config: JetsonConfig,
 }
 
