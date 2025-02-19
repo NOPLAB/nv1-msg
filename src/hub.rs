@@ -13,7 +13,6 @@ pub struct ToHub {
     pub kick: bool,
     pub goal_opp: Option<f32>,
     pub goal_own: Option<f32>,
-    pub config: JetsonConfig,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
