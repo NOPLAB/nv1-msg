@@ -49,6 +49,7 @@ pub struct ToJetson {
     pub sys: System,
     pub vel: Movement,
     pub sensor: Sensor,
+    pub opp_goal_color: GoalColor,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
@@ -70,4 +71,11 @@ pub struct Ir {
     pub x: f32,
     pub y: f32,
     pub strength: f32,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub enum GoalColor {
+    #[default]
+    Blue,
+    Yellow,
 }
