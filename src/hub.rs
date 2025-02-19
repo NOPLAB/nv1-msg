@@ -1,38 +1,70 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct HubMsgPackRx {
-    pub vel: Velocity,
-    pub kick: bool,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct HubMsgPackTx {
-    pub pause: bool,
-    pub shutdown: bool,
-    pub reboot: bool,
-    pub vel: Velocity,
-    pub ir: Ir,
-    pub line: Line,
-    pub have_ball: bool,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct Velocity {
+pub struct Movement {
     pub x: f32,
     pub y: f32,
     pub angle: f32,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct Ir {
-    pub x: f32,
-    pub y: f32,
-    pub strength: f32,
+pub struct ToHub {
+    pub vel: Movement,
+    pub kick: bool,
+    pub config: JetsonConfig,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct Line {
+pub enum JetsonConfig {
+    #[default]
+    None,
+    OpenCVOpp(OpenCVOpp),
+    OpenCVOwn(OpenCVOwn),
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct OpenCVOpp {
+    pub h_min: u8,
+    pub h_max: u8,
+    pub s_min: u8,
+    pub s_max: u8,
+    pub v_min: u8,
+    pub v_max: u8,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct OpenCVOwn {
+    pub h_min: u8,
+    pub h_max: u8,
+    pub s_min: u8,
+    pub s_max: u8,
+    pub v_min: u8,
+    pub v_max: u8,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct ToJetson {
+    pub sys: System,
+    pub vel: Movement,
+    pub sensor: Sensor,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct System {
+    pub pause: bool,
+    pub shutdown: bool,
+    pub reboot: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct Sensor {
+    pub ir: Ir,
+    pub on_line: bool,
+    pub have_ball: bool,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
+pub struct Ir {
     pub x: f32,
     pub y: f32,
     pub strength: f32,
