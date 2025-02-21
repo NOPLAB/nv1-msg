@@ -20,7 +20,6 @@ pub struct ToJetson {
     pub sys: System,
     pub vel: Movement,
     pub sensor: Sensor,
-    pub opp_goal_color: GoalColor,
     pub config: JetsonConfig,
 }
 
@@ -46,32 +45,20 @@ pub struct Ir {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub enum GoalColor {
-    #[default]
-    Blue,
-    Yellow,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
 pub enum JetsonConfig {
     #[default]
     None,
-    OpenCVOpp(OpenCVOpp),
-    OpenCVOwn(OpenCVOwn),
+    OpenCV(OpenCVConfig),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct OpenCVOpp {
-    pub h_min: u8,
-    pub h_max: u8,
-    pub s_min: u8,
-    pub s_max: u8,
-    pub v_min: u8,
-    pub v_max: u8,
+pub struct OpenCVConfig {
+    pub opp_color: HSV,
+    pub own_color: HSV,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize, Default)]
-pub struct OpenCVOwn {
+pub struct HSV {
     pub h_min: u8,
     pub h_max: u8,
     pub s_min: u8,
